@@ -104,6 +104,7 @@
 
   <script>
     const noBtn = document.getElementById('noBtn');
+    let activeEmojis = []; // Array para armazenar os emojis em queda
 
     // Função para iniciar o jogo e mudar o título
     function startGame() {
@@ -113,12 +114,14 @@
       // Muda o fundo da página para algo fofo
       document.body.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-5X548QPxXUjn6kezm2QvQLgwtwhij8gchQ&s')";
       document.body.classList.remove('angry-theme'); // Remove qualquer classe de tema agressivo
+      clearEmojis(); // Limpa qualquer emoji de raiva existente
       createLoveEmojis(); // Cria a chuva de corações
     }
 
     // Função para mudar o tema para vermelho agressivo com emojis
     function changeToAngryTheme() {
       document.body.classList.add('angry-theme'); // Adiciona o tema agressivo
+      clearEmojis(); // Limpa qualquer emoji de corações
       createAngryEmojis(); // Cria a chuva de emojis agressivos
       document.querySelector('h1').innerText = "FOGUINHO! 🔥"; // Mudança no título
       noBtn.style.pointerEvents = 'none'; // Desabilita o botão "Não"
@@ -134,6 +137,7 @@
         emoji.style.left = Math.random() * 100 + 'vw'; // Posição aleatória
         emoji.style.animationDuration = (Math.random() * 3 + 3) + 's'; // Velocidade variada
         document.body.appendChild(emoji);
+        activeEmojis.push(emoji);
 
         // Remove o emoji após a animação
         setTimeout(() => emoji.remove(), 6000);
@@ -150,10 +154,17 @@
         emoji.style.left = Math.random() * 100 + 'vw'; // Posição aleatória
         emoji.style.animationDuration = (Math.random() * 3 + 3) + 's'; // Velocidade variada
         document.body.appendChild(emoji);
+        activeEmojis.push(emoji);
 
         // Remove o emoji após a animação
         setTimeout(() => emoji.remove(), 6000);
       }, 300); // intervalo entre emojis
+    }
+
+    // Função para limpar todos os emojis da tela
+    function clearEmojis() {
+      activeEmojis.forEach(emoji => emoji.remove()); // Remove todos os emojis ativos
+      activeEmojis = []; // Limpa o array de emojis
     }
   </script>
 </body>
