@@ -3,58 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Te lovo Leh</title>
+  <title>Te lovo Lê</title>
   <style>
-    /* Corpo da página */
+    /* Corpo da página com a imagem como fundo */
     body {
-      background: linear-gradient(45deg, #ff99cc, #ff66b2, #ff4d6d);
-      background-size: 400% 400%;
-      animation: gradientBackground 5s ease infinite;
-      font-family: 'Poppins', sans-serif; /* Fonte neutra e fofinha */
+      background: url('https://cdn.pixabay.com/photo/2016/09/14/16/44/emoticon-1669804_640.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Poppins', sans-serif;
       text-align: center;
       padding: 50px 20px;
-      overflow-x: hidden;
-      color: #d6006d;
+      color: #ffffff;
       position: relative;
     }
 
-    /* Animação do fundo com gradiente dinâmico */
-    @keyframes gradientBackground {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Título */
     h1 {
       font-size: 4em;
       margin-bottom: 20px;
-      color: #ff1493;
       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-      animation: textGlow 3s ease-in-out infinite alternate;
     }
 
-    /* Efeito de brilho no título */
-    @keyframes textGlow {
-      0% { text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); }
-      100% { text-shadow: 0 0 20px #ff66b2, 0 0 30px #ff66b2, 0 0 40px #ff66b2; }
-    }
-
-    /* Texto */
     p {
       font-size: 1.5em;
       margin-bottom: 30px;
-      color: #ff3399;
-      animation: fadeIn 3s ease-in-out;
     }
 
-    /* Fade-in do texto */
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    /* Botões */
     .buttons {
       margin-top: 40px;
     }
@@ -69,32 +41,25 @@
       color: white;
       font-weight: bold;
       cursor: pointer;
-      transition: transform 0.2s, background-color 0.3s;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    button:hover {
-      background-color: #ff3f80;
-      transform: scale(1.1);
+    /* Para a mudança de tema de fundo */
+    .angry-theme {
+      background: #ff4d4d;
+      color: #ffffff;
+      transition: background 1s ease-in-out;
     }
 
-    /* Botão "Não" com animação de fuga */
-    #noBtn {
-      position: relative;
-    }
-
-    /* Efeito dos corações caindo */
-    .heart {
+    /* Emojis de polegar para baixo e emojis bravos */
+    .emoji {
       position: fixed;
-      top: -30px;
-      font-size: 2.5em;
+      font-size: 3em;
       animation: fall linear infinite;
-      color: #ff4d6d;
+      z-index: 999;
       pointer-events: none;
-      z-index: 0;
     }
 
-    /* Animação de queda dos corações */
+    /* Animação de queda dos emojis */
     @keyframes fall {
       0% {
         transform: translateY(-50px);
@@ -128,45 +93,46 @@
   
 </head>
 <body>
-  <h1>Te lovo leh</h1>
-  <p>VAI ACENDER O FOGO!?</p>
+  <h1>Te lovo lê</h1>
+  <p>Vai acender o fogo do TikTok?</p>
 
   <div class="buttons">
-    <button onclick="alert('ENTÃO BORA CARAI!')">Sim</button>
-    <button id="noBtn" onclick="moveNoButton()">Não</button>
+    <button onclick="startGame()">Já vou</button>
+    <button id="noBtn" onclick="changeTheme()">Não</button>
   </div>
 
   <script>
     const noBtn = document.getElementById('noBtn');
 
-    // Função para mover o botão "Não" quando o mouse passa por cima
-    function moveNoButton() {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 100);
-      noBtn.style.position = 'absolute';
-      noBtn.style.left = `${x}px`;
-      noBtn.style.top = `${y}px`;
+    // Função para iniciar o jogo (não altera o tema)
+    function startGame() {
+      alert('Aí sim, vamos! 🔥');
     }
 
-    // Função para criar corações que caem
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (4 + Math.random() * 3) + 's'; // animações variadas
-      heart.innerHTML = '❤️';
-      document.body.appendChild(heart);
+    // Função para mudar o tema para vermelho agressivo com emojis
+    function changeTheme() {
+      document.body.classList.add('angry-theme');
+      createAngryEmojis(); // Inicia a criação dos emojis de raiva
 
-      // Remove o coração após a animação
-      setTimeout(() => heart.remove(), 8000);
+      // Desativa a animação do botão "Não" após o clique
+      noBtn.style.pointerEvents = 'none';
     }
 
-    // Intervalo para gerar corações
-    setInterval(() => {
-      if (document.querySelectorAll('.heart').length < 30) {
-        createHeart();
-      }
-    }, 500); // intervalo maior para um número contínuo de corações
+    // Função para criar os emojis de polegar para baixo e raiva
+    function createAngryEmojis() {
+      setInterval(() => {
+        const emoji = document.createElement('div');
+        const randomEmoji = Math.random() < 0.5 ? '👎' : '😡'; // Emoji de polegar para baixo ou raiva
+        emoji.classList.add('emoji');
+        emoji.textContent = randomEmoji;
+        emoji.style.left = Math.random() * 100 + 'vw'; // Posição aleatória
+        emoji.style.animationDuration = (Math.random() * 3 + 3) + 's'; // Velocidade variada
+        document.body.appendChild(emoji);
+
+        // Remove o emoji após a animação
+        setTimeout(() => emoji.remove(), 6000);
+      }, 300); // intervalo entre emojis
+    }
   </script>
 </body>
 </html>
