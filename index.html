@@ -105,13 +105,15 @@
   <script>
     const noBtn = document.getElementById('noBtn');
 
-    // Função para iniciar o jogo (não altera o tema)
+    // Função para iniciar o jogo e mudar o título
     function startGame() {
+      // Muda o título para "Te lovo leh"
+      document.querySelector('h1').innerText = "Te lovo leh";
+
+      // Muda o fundo da página
       document.body.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-5X548QPxXUjn6kezm2QvQLgwtwhij8gchQ&s')";
-      document.body.classList.add('angry-theme');
+      document.body.classList.add('angry-theme'); // Adiciona o tema vermelho agressivo
       createLoveEmojis(); // Cria a chuva de corações
-      document.querySelector('h1').innerText = "FOGUINHO! 🔥"; // Mudança no título
-      noBtn.style.pointerEvents = 'none'; // Desabilita o botão "Não"
     }
 
     // Função para mudar o tema para vermelho agressivo com emojis
