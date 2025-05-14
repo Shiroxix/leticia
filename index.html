@@ -19,7 +19,37 @@
     h1 {
       font-size: 3em;
       margin-bottom: 20px;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      transition: all 0.5s ease-in-out;
+    }
+
+    .fire-effect {
+      color: #ffcc00;
+      text-shadow:
+        0 0 5px #ff9900,
+        0 0 10px #ff3300,
+        0 0 20px #ff0000,
+        0 0 30px #cc0000;
+      animation: flicker 1s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0% { text-shadow: 0 0 5px #ff9900, 0 0 10px #ff3300, 0 0 20px #ff0000; }
+      100% { text-shadow: 0 0 10px #ffaa00, 0 0 20px #ff6600, 0 0 30px #ff3300; }
+    }
+
+    .cute-effect {
+      color: #ffb6c1;
+      text-shadow:
+        0 0 10px #ffc0cb,
+        0 0 20px #ff69b4,
+        0 0 30px #ff1493;
+      animation: glow 2s infinite ease-in-out;
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px #ffc0cb; }
+      50% { text-shadow: 0 0 15px #ff69b4; }
+      100% { text-shadow: 0 0 5px #ffc0cb; }
     }
 
     p {
@@ -83,7 +113,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <h1 id="title">FOGUINHO!</h1>
+  <h1 id="title" class="fire-effect">FOGUINHO!</h1>
   <p>Vai acender o fogo do TikTok?</p>
   <div class="buttons">
     <button onclick="activateLove()">Já vou</button>
@@ -124,7 +154,9 @@
     function activateLove() {
       document.body.classList.remove('angry-theme');
       document.body.classList.add('love-theme');
-      title.innerText = "Te lovo leh";
+      title.textContent = "Te lovo leh";
+      title.classList.remove('fire-effect');
+      title.classList.add('cute-effect');
       clearEmojis();
       dropEmojis('love');
     }
@@ -132,7 +164,9 @@
     function activateAnger() {
       document.body.classList.remove('love-theme');
       document.body.classList.add('angry-theme');
-      title.innerText = "FOGUINHO! 🔥";
+      title.textContent = "FOGUINHO! 🔥";
+      title.classList.remove('cute-effect');
+      title.classList.add('fire-effect');
       clearEmojis();
       dropEmojis('angry');
     }
