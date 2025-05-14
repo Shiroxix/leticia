@@ -8,7 +8,7 @@
     /* Corpo da página */
     body {
       background: linear-gradient(to bottom, #ffe6f0, #ffc0cb);
-      font-family: 'Dancing Script', cursive;
+      font-family: 'Poppins', sans-serif; /* Fonte neutra e fofinha */
       text-align: center;
       padding: 50px 20px;
       overflow-x: hidden;
@@ -77,14 +77,18 @@
       transform: scale(1.1);
     }
 
-    /* Botão "Não" que se move */
+    /* Botão "Não" com animação de fuga */
     #noBtn {
       position: relative;
-      transition: transform 0.3s ease-in-out;
+      animation: moveAway 1s ease-in-out infinite alternate;
     }
 
-    #noBtn:hover {
-      transform: scale(1.1);
+    @keyframes moveAway {
+      0% { transform: translateX(0) translateY(0); }
+      25% { transform: translateX(20px) translateY(10px); }
+      50% { transform: translateX(-20px) translateY(-10px); }
+      75% { transform: translateX(20px) translateY(-10px); }
+      100% { transform: translateX(-20px) translateY(10px); }
     }
 
     /* Efeito dos corações caindo */
@@ -128,7 +132,7 @@
   </style>
 
   <!-- Fonte fofa do Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
   
 </head>
 <body>
@@ -174,3 +178,4 @@
   </script>
 </body>
 </html>
+
