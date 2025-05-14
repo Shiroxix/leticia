@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Te lovo Lê</title>
+  <title>FOGUINHO!</title>
   <style>
     /* Corpo da página com a imagem como fundo */
     body {
@@ -14,6 +14,7 @@
       padding: 50px 20px;
       color: #ffffff;
       position: relative;
+      transition: background 1s ease-in-out;
     }
 
     h1 {
@@ -50,7 +51,7 @@
       transition: background 1s ease-in-out;
     }
 
-    /* Emojis de polegar para baixo e emojis bravos */
+    /* Emojis de corações caindo */
     .emoji {
       position: fixed;
       font-size: 3em;
@@ -93,7 +94,7 @@
   
 </head>
 <body>
-  <h1>Te lovo lê</h1>
+  <h1>FOGUINHO!</h1>
   <p>Vai acender o fogo do TikTok?</p>
 
   <div class="buttons">
@@ -106,23 +107,27 @@
 
     // Função para iniciar o jogo (não altera o tema)
     function startGame() {
-      alert('Aí sim, vamos! 🔥');
+      document.body.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-5X548QPxXUjn6kezm2QvQLgwtwhij8gchQ&s')";
+      document.body.classList.add('angry-theme');
+      createLoveEmojis(); // Cria a chuva de corações
+      document.querySelector('h1').innerText = "FOGUINHO! 🔥"; // Mudança no título
+      noBtn.style.pointerEvents = 'none'; // Desabilita o botão "Não"
     }
 
     // Função para mudar o tema para vermelho agressivo com emojis
     function changeTheme() {
+      document.body.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-5X548QPxXUjn6kezm2QvQLgwtwhij8gchQ&s')";
       document.body.classList.add('angry-theme');
-      createAngryEmojis(); // Inicia a criação dos emojis de raiva
-
-      // Desativa a animação do botão "Não" após o clique
-      noBtn.style.pointerEvents = 'none';
+      createLoveEmojis(); // Cria a chuva de corações
+      document.querySelector('h1').innerText = "FOGUINHO! 🔥"; // Mudança no título
+      noBtn.style.pointerEvents = 'none'; // Desabilita o botão "Não"
     }
 
-    // Função para criar os emojis de polegar para baixo e raiva
-    function createAngryEmojis() {
+    // Função para criar os corações caindo
+    function createLoveEmojis() {
       setInterval(() => {
         const emoji = document.createElement('div');
-        const randomEmoji = Math.random() < 0.5 ? '👎' : '😡'; // Emoji de polegar para baixo ou raiva
+        const randomEmoji = Math.random() < 0.5 ? '❤️' : '💖'; // Emoji de coração vermelho ou rosa
         emoji.classList.add('emoji');
         emoji.textContent = randomEmoji;
         emoji.style.left = Math.random() * 100 + 'vw'; // Posição aleatória
