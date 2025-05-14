@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FOGUINHO!</title>
   <style>
-    /* Corpo da página com a imagem como fundo */
+    /* Corpo da página com a imagem inicial como fundo */
     body {
       background: url('https://cdn.pixabay.com/photo/2016/09/14/16/44/emoticon-1669804_640.png') no-repeat center center fixed;
       background-size: cover;
@@ -44,7 +44,7 @@
       cursor: pointer;
     }
 
-    /* Para a mudança de tema de fundo */
+    /* Para a mudança de tema de fundo (agressivo) */
     .angry-theme {
       background: #ff4d4d;
       color: #ffffff;
@@ -99,7 +99,7 @@
 
   <div class="buttons">
     <button onclick="startGame()">Já vou</button>
-    <button id="noBtn" onclick="changeTheme()">Não</button>
+    <button id="noBtn" onclick="changeToAngryTheme()">Não</button>
   </div>
 
   <script>
@@ -110,26 +110,42 @@
       // Muda o título para "Te lovo leh"
       document.querySelector('h1').innerText = "Te lovo leh";
 
-      // Muda o fundo da página
+      // Muda o fundo da página para algo fofo
       document.body.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-5X548QPxXUjn6kezm2QvQLgwtwhij8gchQ&s')";
-      document.body.classList.add('angry-theme'); // Adiciona o tema vermelho agressivo
+      document.body.classList.remove('angry-theme'); // Remove qualquer classe de tema agressivo
       createLoveEmojis(); // Cria a chuva de corações
     }
 
     // Função para mudar o tema para vermelho agressivo com emojis
-    function changeTheme() {
+    function changeToAngryTheme() {
       document.body.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-5X548QPxXUjn6kezm2QvQLgwtwhij8gchQ&s')";
-      document.body.classList.add('angry-theme');
-      createLoveEmojis(); // Cria a chuva de corações
+      document.body.classList.add('angry-theme'); // Adiciona o tema agressivo
+      createAngryEmojis(); // Cria a chuva de emojis agressivos
       document.querySelector('h1').innerText = "FOGUINHO! 🔥"; // Mudança no título
       noBtn.style.pointerEvents = 'none'; // Desabilita o botão "Não"
     }
 
-    // Função para criar os corações caindo
+    // Função para criar os corações caindo (quando o tema fofo é ativado)
     function createLoveEmojis() {
       setInterval(() => {
         const emoji = document.createElement('div');
         const randomEmoji = Math.random() < 0.5 ? '❤️' : '💖'; // Emoji de coração vermelho ou rosa
+        emoji.classList.add('emoji');
+        emoji.textContent = randomEmoji;
+        emoji.style.left = Math.random() * 100 + 'vw'; // Posição aleatória
+        emoji.style.animationDuration = (Math.random() * 3 + 3) + 's'; // Velocidade variada
+        document.body.appendChild(emoji);
+
+        // Remove o emoji após a animação
+        setTimeout(() => emoji.remove(), 6000);
+      }, 300); // intervalo entre emojis
+    }
+
+    // Função para criar os emojis agressivos (quando o tema agressivo é ativado)
+    function createAngryEmojis() {
+      setInterval(() => {
+        const emoji = document.createElement('div');
+        const randomEmoji = Math.random() < 0.5 ? '👎' : '😡'; // Emoji de polegar para baixo ou bravo
         emoji.classList.add('emoji');
         emoji.textContent = randomEmoji;
         emoji.style.left = Math.random() * 100 + 'vw'; // Posição aleatória
